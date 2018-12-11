@@ -1,12 +1,12 @@
-#######################
+*******************
 inventorysystem
-#######################
+*******************
 
 Create an Inventory System using CodeIgniter, MySQL &amp; PHP
 
-#######################
+*******************
 System Features
-#######################
+*******************
 Manage Users
 -Add new user detail
 -View, Update, and remove user information
@@ -41,9 +41,9 @@ Profile
 Setting
 -View, and Update logged in user information
 
-######################
+*******************
 Super Admin Credential
-######################
+*******************
 email: admin@admin.com
 password: password
 
