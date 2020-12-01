@@ -1,75 +1,99 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Company extends Admin_Controller 
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+/*
+ *	@author : Imran Shah
+ *  @support: shahmian@gmail.com
+ *	date	: 18 April, 2018
+ *	Kandi Inventory Management System
+ * website: kelextech.com
+ *  version: 1.0
+ */
+class Company extends MY_Controller
 {
-	public function __construct()
-	{
-		parent::__construct();
 
-		$this->not_logged_in();
+    public function __construct()
+    {
+        parent::__construct();
+        if ($this->session->userdata('user_id')) {
+        } else {
 
-		$this->data['page_title'] = 'Company';
 
-		$this->load->model('model_company');
-	}
+            redirect(base_url() . 'index.php/Users/login');
 
-    /* 
-    * It redirects to the company page and displays all the company information
-    * It also updates the company information into the database if the 
-    * validation for each input field is successfully valid
-    */
-	public function index()
-	{  
-        if(!in_array('updateCompany', $this->permission)) {
-            redirect('dashboard', 'refresh');
         }
-        
-		$this->form_validation->set_rules('company_name', 'Company name', 'trim|required');
-		$this->form_validation->set_rules('service_charge_value', 'Charge Amount', 'trim|integer');
-		$this->form_validation->set_rules('vat_charge_value', 'Vat Charge', 'trim|integer');
-		$this->form_validation->set_rules('address', 'Address', 'trim|required');
-		$this->form_validation->set_rules('message', 'Message', 'trim|required');
-	
-	
-        if ($this->form_validation->run() == TRUE) {
-            // true case
 
-        	$data = array(
-        		'company_name' => $this->input->post('company_name'),
-        		'service_charge_value' => $this->input->post('service_charge_value'),
-        		'vat_charge_value' => $this->input->post('vat_charge_value'),
-        		'address' => $this->input->post('address'),
-        		'phone' => $this->input->post('phone'),
-        		'country' => $this->input->post('country'),
-        		'message' => $this->input->post('message'),
-                'currency' => $this->input->post('currency')
-        	);
+    }
 
 
+    // company detail form
 
-        	$update = $this->model_company->update($data, 1);
-        	if($update == true) {
-        		$this->session->set_flashdata('success', 'Successfully created');
-        		redirect('company/', 'refresh');
-        	}
-        	else {
-        		$this->session->set_flashdata('errors', 'Error occurred!!');
-        		redirect('company/index', 'refresh');
-        	}
+    public function add_company()
+    {
+
+        $Page = $this->General->check_url_permission_single();
+
+        $this->header();
+
+        $this->load->view('company/add_company');
+
+        $this->footer();
+
+    }
+
+    // List companies
+    public function list_company()
+    {
+        $group_id = $this->session->userdata("group_id");
+        if($group_id !=1){
+            $Page = $this->General->check_url_permission_single();
+
         }
-        else {
 
-            // false case
-            
-            
-            $this->data['currency_symbols'] = $this->currency();
-        	$this->data['company_data'] = $this->model_company->getCompanyData(1);
-			$this->render_template('company/index', $this->data);			
-        }	
+        $data['company'] = $this->General->fetch_records("company");
+        $this->header();
+        $this->load->view('company/list_company', $data);
+        $this->footer();
 
-		
-	}
 
+    }
+
+    // Add company to database
+    public function insert_company()
+    {
+        $data = array(
+            'company_name' => $this->input->post("company_name"),
+            'phone_no' => $this->input->post("phone_no"),
+            'fax_no' => $this->input->post("fax_no"),
+            'email' => $this->input->post("email"),
+        );
+        $this->load->model('Main_model');
+        $response = $this->Main_model->add_record('company', $data);
+        if ($response) {
+            $this->session->set_flashdata('success', 'Record added Successfully..!');
+            redirect(base_url() . 'index.php/company/list_company');
+        }
+    }
+
+    // Update Company details
+    public function update_company()
+    {
+        $comp_id = $this->input->post('cid');
+
+        $comp_info = array(
+            'company_name' => $this->input->post('company_name'),
+            'phone_no' => $this->input->post('phone_no'),
+            'fax_no' => $this->input->post('fax_no'),
+            'email' => $this->input->post('email')
+        );
+
+        $where = array('company_id' => $comp_id);
+        $this->load->model('Main_model');
+        $response = $this->Main_model->update_record('company', $comp_info, $where);
+        if ($response) {
+            $this->session->set_flashdata('update', 'Record Updated Successfully..!');
+            redirect(base_url() . 'index.php/company/list_company');
+        }
+    }
 }

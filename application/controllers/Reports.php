@@ -1,58 +1,168 @@
-<?php  
+<?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+/*
+ *	@author : Imran Shah
+ *  @support: shahmian@gmail.com
+ *	date	: 18 April, 2018
+ *	Kandi Inventory Management System
+ * website: kelextech.com
+ *  version: 1.0
+ */
+class Reports extends MY_Controller
+{
 
-class Reports extends Admin_Controller 
-{	
-	public function __construct()
-	{
-		parent::__construct();
-		$this->data['page_title'] = 'Stores';
-		$this->load->model('model_reports');
-	}
+    public function __construct()
+    {
+        parent::__construct();
 
-	/* 
-    * It redirects to the report page
-    * and based on the year, all the orders data are fetch from the database.
-    */
-	public function index()
-	{
-		if(!in_array('viewReports', $this->permission)) {
-            redirect('dashboard', 'refresh');
+        if ($this->session->userdata('user_id')) {
+            
+        } else {
+
+ 
+            redirect(base_url() . 'index.php/Users/login');
+
         }
-		
-		$today_year = date('Y');
+    }
 
-		if($this->input->post('select_year')) {
-			$today_year = $this->input->post('select_year');
-		}
+    //Purchase Report  Form
+    public function purchase()
+    {
+        $data['items'] = $this->Main_model->select('item');        
+        $this->header($title = 'Purchase Report');
+        $this->load->view('reports/purchase',$data);
+        $this->footer();
 
-		$parking_data = $this->model_reports->getOrderData($today_year);
-		$this->data['report_years'] = $this->model_reports->getOrderYear();
-		
+    }
+     // Purchase Report Details
+    public function purchaseReportOld()
+    {
+        $start_date = $this->input->post('start_date');
+        $end_date = $this->input->post('end_date');
+        $start_date1 = date('Y-m-d', strtotime($start_date));
+        $end_date1 = date('Y-m-d', strtotime($end_date));
+        $data['purchases'] = $this->Main_model->purchases($start_date1,$end_date1);
+//echo "<pre>";print_r($data['purchases']);exit;       
+	   $data['start'] = $start_date;
+        $data['end'] = $end_date;
+        $data['items'] = $this->Main_model->select('item');
+        $this->header();
+        $this->load->view('reports/purchase',$data);
+        $this->footer();
+    }
+	function purchaseReport(){
+		$start_date = $this->input->post('start_date');
+        $end_date = $this->input->post('end_date');
+        $start_date1 = date('Y-m-d', strtotime($start_date));
+        $end_date1 = date('Y-m-d', strtotime($end_date));
 
-		$final_parking_data = array();
-		foreach ($parking_data as $k => $v) {
-			
-			if(count($v) > 1) {
-				$total_amount_earned = array();
-				foreach ($v as $k2 => $v2) {
-					if($v2) {
-						$total_amount_earned[] = $v2['gross_amount'];						
-					}
-				}
-				$final_parking_data[$k] = array_sum($total_amount_earned);	
-			}
-			else {
-				$final_parking_data[$k] = 0;	
-			}
-			
-		}
-		
-		$this->data['selected_year'] = $today_year;
-		$this->data['company_currency'] = $this->company_currency();
-		$this->data['results'] = $final_parking_data;
+        $invoice = $this->Main_model->get_invoice_by_date1($start_date1, $end_date1);
+               //echo "<pre>";print_r($invoice);exit;
+        if (!empty($invoice)) {
+            $this->bps_table();
+            foreach ($invoice as $v_invoice) {
+                $data['invoice_details'][$v_invoice->purchase_no] = $this->Main_model->p_detail(array('purchase_no' => $v_invoice->purchase_no));
+                $data['order'][] = $v_invoice;
+            }
+        }
 
-		$this->render_template('reports/index', $this->data);
+       // echo "<pre>";print_r($data);exit;
+        //$data['purchases'] = $this->Main_model->getSales($start_date1,$end_date1);
+        $data['start'] = $start_date;
+        $data['end'] = $end_date;
+        $data['items'] = $this->Main_model->select('item');
+        $this->header();
+        //print_r($data);
+        $this->load->view('reports/p_report',$data);
+        $this->footer();
 	}
-}	
+
+    // Sales Report Form
+    public function sales_report()
+    {
+        $data['items'] = $this->Main_model->select('item');
+        $this->header($title = 'Sales Report');
+        $this->load->view('reports/sales_report',$data);
+        $this->footer();
+
+    }
+
+    public function print()
+    {
+        $data['item'] = $this->Main_model->item_cat();
+        $data['category'] = $this->Main_model->select('category');
+        $this->header();
+        $this->load->view('reports/print', $data);
+        $this->footer();
+
+    }
+
+    public function bps_table()
+    {
+       $this->Main_model->bps_table('sales_detail','sales_id');
+    }
+
+    public function item_table()
+    {
+       $this->Main_model->bps_table('item','item_id');
+    }
+    // Get Sales Report Details
+    public function salesReport()
+    {
+        $start_date = $this->input->post('start_date');
+        $end_date = $this->input->post('end_date');
+        $start_date1 = date('Y-m-d', strtotime($start_date));
+        $end_date1 = date('Y-m-d', strtotime($end_date));
+
+        $invoice = $this->Main_model->get_invoice_by_date($start_date1, $end_date1);
+               //echo "<pre>";print_r($invoice);exit;
+        if (!empty($invoice)) {
+            $this->bps_table();
+            foreach ($invoice as $v_invoice) {
+                $data['invoice_details'][$v_invoice->payment_mode] = $this->Main_model->sales_detail(array('sales_no' => $v_invoice->sales_no));
+                $data['order'][] = $v_invoice;
+            }
+        }
+
+       // echo "<pre>";print_r($data);exit;
+        //$data['purchases'] = $this->Main_model->getSales($start_date1,$end_date1);
+        $data['start'] = $start_date;
+        $data['end'] = $end_date;
+        $data['items'] = $this->Main_model->select('item');
+        $this->header();
+        //print_r($data);
+        $this->load->view('reports/sales_report',$data);
+        $this->footer();
+    }
+
+    public function itemsearch()
+    {
+        $start_date = $this->input->post('start_date');
+        // $end_date = $this->input->post('end_date');
+        // $start_date1 = date('Y-m-d', strtotime($start_date));
+        // $end_date1 = date('Y-m-d', strtotime($end_date));
+
+        $invoice = $this->Main_model->getItem($start_date);
+               //echo "<pre>";print_r($invoice);exit;
+        if (!empty($invoice)) {
+            $this->item_table();
+            foreach ($invoice as $v_invoice) {
+                $data['invoice_details'][$v_invoice->category_id] = $this->Main_model->item_detail(array('category_id' => $v_invoice->item_id));
+                $data['order'][] = $v_invoice;
+            }
+        }
+
+       // echo "<pre>";print_r($data);exit;
+        //$data['purchases'] = $this->Main_model->getSales($start_date1,$end_date1);
+        $data['start'] = $start_date;
+        // $data['end'] = $end_date;
+        $data['items'] = $this->Main_model->select('item');
+        $this->header();
+        //print_r($data);
+        $this->load->view('reports/print',$data);
+        $this->footer();
+    }
+
+}
