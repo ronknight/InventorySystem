@@ -6,8 +6,7 @@
  *
  * This content is released under the MIT License (MIT)
  *
- * Copyright (c) 2014-2019 British Columbia Institute of Technology
- * Copyright (c) 2019-2020 CodeIgniter Foundation
+ * Copyright (c) 2014 - 2017, British Columbia Institute of Technology
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,98 +26,90 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
- * @package    CodeIgniter
- * @author     CodeIgniter Dev Team
- * @copyright  2019-2020 CodeIgniter Foundation
- * @license    https://opensource.org/licenses/MIT	MIT License
- * @link       https://codeigniter.com
- * @since      Version 4.0.0
+ * @package	CodeIgniter
+ * @author	EllisLab Dev Team
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+ * @copyright	Copyright (c) 2014 - 2017, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	https://codeigniter.com
+ * @since	Version 1.0.0
  * @filesource
  */
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * CodeIgniter Array Helpers
  *
- * @package CodeIgniter
+ * @package		CodeIgniter
+ * @subpackage	Helpers
+ * @category	Helpers
+ * @author		EllisLab Dev Team
+ * @link		https://codeigniter.com/user_guide/helpers/array_helper.html
  */
 
-if (! function_exists('dot_array_search'))
+// ------------------------------------------------------------------------
+
+if ( ! function_exists('element'))
 {
 	/**
-	 * Searches an array through dot syntax. Supports
-	 * wildcard searches, like foo.*.bar
+	 * Element
 	 *
-	 * @param string $index
-	 * @param array  $array
+	 * Lets you determine whether an array index is set and whether it has a value.
+	 * If the element is empty it returns NULL (or whatever you specify as the default value.)
 	 *
-	 * @return mixed|null
+	 * @param	string
+	 * @param	array
+	 * @param	mixed
+	 * @return	mixed	depends on what the array contains
 	 */
-	function dot_array_search(string $index, array $array)
+	function element($item, array $array, $default = NULL)
 	{
-		$segments = explode('.', rtrim(rtrim($index, '* '), '.'));
-
-		return _array_search_dot($segments, $array);
+		return array_key_exists($item, $array) ? $array[$item] : $default;
 	}
 }
 
-if (! function_exists('_array_search_dot'))
+// ------------------------------------------------------------------------
+
+if ( ! function_exists('random_element'))
 {
 	/**
-	 * Used by dot_array_search to recursively search the
-	 * array with wildcards.
+	 * Random Element - Takes an array as input and returns a random element
 	 *
-	 * @param array $indexes
-	 * @param array $array
-	 *
-	 * @return mixed|null
+	 * @param	array
+	 * @return	mixed	depends on what the array contains
 	 */
-	function _array_search_dot(array $indexes, array $array)
+	function random_element($array)
 	{
-		// Grab the current index
-		$currentIndex = $indexes
-			? array_shift($indexes)
-			: null;
+		return is_array($array) ? $array[array_rand($array)] : $array;
+	}
+}
 
-		if ((empty($currentIndex)  && intval($currentIndex) !== 0) || (! isset($array[$currentIndex]) && $currentIndex !== '*'))
+// --------------------------------------------------------------------
+
+if ( ! function_exists('elements'))
+{
+	/**
+	 * Elements
+	 *
+	 * Returns only the array items specified. Will return a default value if
+	 * it is not set.
+	 *
+	 * @param	array
+	 * @param	array
+	 * @param	mixed
+	 * @return	mixed	depends on what the array contains
+	 */
+	function elements($items, array $array, $default = NULL)
+	{
+		$return = array();
+
+		is_array($items) OR $items = array($items);
+
+		foreach ($items as $item)
 		{
-			return null;
+			$return[$item] = array_key_exists($item, $array) ? $array[$item] : $default;
 		}
 
-		// Handle Wildcard (*)
-		if ($currentIndex === '*')
-		{
-			// If $array has more than 1 item, we have to loop over each.
-			if (is_array($array))
-			{
-				foreach ($array as $value)
-				{
-					$answer = _array_search_dot($indexes, $value);
-
-					if ($answer !== null)
-					{
-						return $answer;
-					}
-				}
-
-				// Still here after searching all child nodes?
-				return null;
-			}
-		}
-
-		// If this is the last index, make sure to return it now,
-		// and not try to recurse through things.
-		if (empty($indexes))
-		{
-			return $array[$currentIndex];
-		}
-
-		// Do we need to recursively search this value?
-		if (is_array($array[$currentIndex]) && $array[$currentIndex])
-		{
-			return _array_search_dot($indexes, $array[$currentIndex]);
-		}
-
-		// Otherwise we've found our match!
-		return $array[$currentIndex];
+		return $return;
 	}
 }
