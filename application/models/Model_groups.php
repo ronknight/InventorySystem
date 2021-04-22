@@ -10,12 +10,12 @@ class Model_groups extends CI_Model
 	public function getGroupData($groupId = null) 
 	{
 		if($groupId) {
-			$sql = "SELECT * FROM groups WHERE id = ?";
+			$sql = "SELECT * FROM `groups` WHERE id = ?";
 			$query = $this->db->query($sql, array($groupId));
 			return $query->row_array();
 		}
 
-		$sql = "SELECT * FROM groups WHERE id != ?";
+		$sql = "SELECT * FROM `groups` WHERE id != ?";
 		$query = $this->db->query($sql, array(1));
 		return $query->result_array();
 	}
@@ -42,15 +42,15 @@ class Model_groups extends CI_Model
 
 	public function existInUserGroup($id)
 	{
-		$sql = "SELECT * FROM user_group WHERE group_id = ?";
+		$sql = "SELECT * FROM `user_group` WHERE group_id = ?";
 		$query = $this->db->query($sql, array($id));
 		return ($query->num_rows() == 1) ? true : false;
 	}
 
 	public function getUserGroupByUserId($user_id) 
 	{
-		$sql = "SELECT * FROM user_group 
-		INNER JOIN groups ON groups.id = user_group.group_id 
+		$sql = "SELECT * FROM `user_group` 
+		INNER JOIN `groups` ON groups.id = user_group.group_id 
 		WHERE user_group.user_id = ?";
 		$query = $this->db->query($sql, array($user_id));
 		$result = $query->row_array();

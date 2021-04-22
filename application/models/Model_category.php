@@ -10,7 +10,7 @@ class Model_category extends CI_Model
 	/* get active brand infromation */
 	public function getActiveCategroy()
 	{
-		$sql = "SELECT * FROM categories WHERE active = ?";
+		$sql = "SELECT * FROM `categories` WHERE active = ?";
 		$query = $this->db->query($sql, array(1));
 		return $query->result_array();
 	}
@@ -19,12 +19,12 @@ class Model_category extends CI_Model
 	public function getCategoryData($id = null)
 	{
 		if($id) {
-			$sql = "SELECT * FROM categories WHERE id = ?";
+			$sql = "SELECT * FROM `categories` WHERE id = ?";
 			$query = $this->db->query($sql, array($id));
 			return $query->row_array();
 		}
 
-		$sql = "SELECT * FROM categories";
+		$sql = "SELECT * FROM `categories`";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}

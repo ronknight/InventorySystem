@@ -10,7 +10,7 @@ class Model_stores extends CI_Model
 	/* get the active store data */
 	public function getActiveStore()
 	{
-		$sql = "SELECT * FROM stores WHERE active = ?";
+		$sql = "SELECT * FROM `stores` WHERE active = ?";
 		$query = $this->db->query($sql, array(1));
 		return $query->result_array();
 	}
@@ -19,12 +19,12 @@ class Model_stores extends CI_Model
 	public function getStoresData($id = null)
 	{
 		if($id) {
-			$sql = "SELECT * FROM stores where id = ?";
+			$sql = "SELECT * FROM `stores` where id = ?";
 			$query = $this->db->query($sql, array($id));
 			return $query->row_array();
 		}
 
-		$sql = "SELECT * FROM stores";
+		$sql = "SELECT * FROM `stores`";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
@@ -57,7 +57,7 @@ class Model_stores extends CI_Model
 
 	public function countTotalStores()
 	{
-		$sql = "SELECT * FROM stores WHERE active = ?";
+		$sql = "SELECT * FROM `stores` WHERE active = ?";
 		$query = $this->db->query($sql, array(1));
 		return $query->num_rows();
 	}

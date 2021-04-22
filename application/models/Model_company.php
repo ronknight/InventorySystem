@@ -11,7 +11,7 @@ class Model_company extends CI_Model
 	public function getCompanyData($id = null)
 	{
 		if($id) {
-			$sql = "SELECT * FROM company WHERE id = ?";
+			$sql = "SELECT * FROM `company` WHERE id = ?";
 			$query = $this->db->query($sql, array($id));
 			return $query->row_array();
 		}
