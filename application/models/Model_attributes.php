@@ -10,7 +10,7 @@ class Model_attributes extends CI_Model
 	// get the active atttributes data 
 	public function getActiveAttributeData()
 	{
-		$sql = "SELECT * FROM attributes WHERE active = ?";
+		$sql = "SELECT * FROM `attributes` WHERE active = ?";
 		$query = $this->db->query($sql, array(1));
 		return $query->result_array();
 	}
@@ -19,12 +19,12 @@ class Model_attributes extends CI_Model
 	public function getAttributeData($id = null)
 	{
 		if($id) {
-			$sql = "SELECT * FROM attributes where id = ?";
+			$sql = "SELECT * FROM `attributes` where id = ?";
 			$query = $this->db->query($sql, array($id));
 			return $query->row_array();
 		}
 
-		$sql = "SELECT * FROM attributes";
+		$sql = "SELECT * FROM `attributes`";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
@@ -32,7 +32,7 @@ class Model_attributes extends CI_Model
 	public function countAttributeValue($id = null)
 	{
 		if($id) {
-			$sql = "SELECT * FROM attribute_value WHERE attribute_parent_id = ?";
+			$sql = "SELECT * FROM `attribute_value` WHERE attribute_parent_id = ?";
 			$query = $this->db->query($sql, array($id));
 			return $query->num_rows();
 		}
@@ -42,14 +42,14 @@ class Model_attributes extends CI_Model
 	// $id = attribute_parent_id
 	public function getAttributeValueData($id = null)
 	{
-		$sql = "SELECT * FROM attribute_value WHERE attribute_parent_id = ?";
+		$sql = "SELECT * FROM `attribute_value` WHERE attribute_parent_id = ?";
 		$query = $this->db->query($sql, array($id));
 		return $query->result_array();
 	}
 
 	public function getAttributeValueById($id = null)
 	{
-		$sql = "SELECT * FROM attribute_value WHERE id = ?";
+		$sql = "SELECT * FROM `attribute_value` WHERE id = ?";
 		$query = $this->db->query($sql, array($id));
 		return $query->row_array();
 	}

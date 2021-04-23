@@ -11,12 +11,12 @@ class Model_orders extends CI_Model
 	public function getOrdersData($id = null)
 	{
 		if($id) {
-			$sql = "SELECT * FROM orders WHERE id = ?";
+			$sql = "SELECT * FROM `orders` WHERE id = ?";
 			$query = $this->db->query($sql, array($id));
 			return $query->row_array();
 		}
 
-		$sql = "SELECT * FROM orders ORDER BY id DESC";
+		$sql = "SELECT * FROM `orders` ORDER BY id DESC";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
@@ -28,7 +28,7 @@ class Model_orders extends CI_Model
 			return false;
 		}
 
-		$sql = "SELECT * FROM orders_item WHERE order_id = ?";
+		$sql = "SELECT * FROM `orders_item` WHERE order_id = ?";
 		$query = $this->db->query($sql, array($order_id));
 		return $query->result_array();
 	}
@@ -71,7 +71,7 @@ class Model_orders extends CI_Model
 
     		$this->db->insert('orders_item', $items);
 
-    		// now decrease the stock from the product
+    		// now decrease the stock FROM `the` product
     		$product_data = $this->model_products->getProductData($this->input->post('product')[$x]);
     		$qty = (int) $product_data['qty'] - (int) $this->input->post('qty')[$x];
 
@@ -87,7 +87,7 @@ class Model_orders extends CI_Model
 	public function countOrderItem($order_id)
 	{
 		if($order_id) {
-			$sql = "SELECT * FROM orders_item WHERE order_id = ?";
+			$sql = "SELECT * FROM `orders_item` WHERE order_id = ?";
 			$query = $this->db->query($sql, array($order_id));
 			return $query->num_rows();
 		}
@@ -149,7 +149,7 @@ class Model_orders extends CI_Model
 	    		);
 	    		$this->db->insert('orders_item', $items);
 
-	    		// now decrease the stock from the product
+	    		// now decrease the stock FROM `the` product
 	    		$product_data = $this->model_products->getProductData($this->input->post('product')[$x]);
 	    		$qty = (int) $product_data['qty'] - (int) $this->input->post('qty')[$x];
 
@@ -177,7 +177,7 @@ class Model_orders extends CI_Model
 
 	public function countTotalPaidOrders()
 	{
-		$sql = "SELECT * FROM orders WHERE paid_status = ?";
+		$sql = "SELECT * FROM `orders` WHERE paid_status = ?";
 		$query = $this->db->query($sql, array(1));
 		return $query->num_rows();
 	}
