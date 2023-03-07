@@ -6,7 +6,6 @@
     <section class="content-header">
       <h1>
         Dashboard
-        <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -26,7 +25,7 @@
               <div class="inner">
                 <h3><?php echo $total_products ?></h3>
 
-                <p>Total Products</p>
+                <p>Total Barang   </p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
@@ -41,7 +40,7 @@
               <div class="inner">
                 <h3><?php echo $total_paid_orders ?></h3>
 
-                <p>Total Paid Orders</p>
+                <p>Total </p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
