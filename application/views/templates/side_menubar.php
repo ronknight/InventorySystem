@@ -65,7 +65,7 @@
         <?php if (in_array('createCategory', $user_permission) || in_array('updateCategory', $user_permission) || in_array('viewCategory', $user_permission) || in_array('deleteCategory', $user_permission)) : ?>
           <li id="categoryNav">
             <a href="<?php echo base_url('category/') ?>">
-              <i class="fa fa-files-o"></i> <span>Category</span>
+              <i class="fa fa-files-o"></i> <span>Departemen</span>
             </a>
           </li>
         <?php endif; ?>

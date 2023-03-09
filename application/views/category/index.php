@@ -6,11 +6,11 @@
   <section class="content-header">
     <h1>
       Manage
-      <small>Category</small>
+      <small>Departemen</small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Category</li>
+      <li class="active">Departemen</li>
     </ol>
   </section>
 
@@ -35,20 +35,20 @@
         <?php endif; ?>
 
         <?php if(in_array('createCategory', $user_permission)): ?>
-          <button class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add Category</button>
+          <button class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add Departemen</button>
           <br /> <br />
         <?php endif; ?>
 
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Manage Categories</h3>
+            <h3 class="box-title">Manage Departemen</h3>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
             <table id="manageTable" class="table table-bordered table-striped">
               <thead>
               <tr>
-                <th>Category Name</th>
+                <th>Departemen Name</th>
                 <th>Status</th>
                 <?php if(in_array('updateCategory', $user_permission) || in_array('deleteCategory', $user_permission)): ?>
                   <th>Action</th>
@@ -79,7 +79,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Add Category</h4>
+        <h4 class="modal-title">Add Departemen</h4>
       </div>
 
       <form role="form" action="<?php echo base_url('category/create') ?>" method="post" id="createForm">
@@ -87,7 +87,7 @@
         <div class="modal-body">
 
           <div class="form-group">
-            <label for="brand_name">Category Name</label>
+            <label for="brand_name">Departemen Name</label>
             <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Enter category name" autocomplete="off">
           </div>
           <div class="form-group">
@@ -119,7 +119,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Edit Category</h4>
+        <h4 class="modal-title">Edit Departemen</h4>
       </div>
 
       <form role="form" action="<?php echo base_url('category/update') ?>" method="post" id="updateForm">
@@ -128,7 +128,7 @@
           <div id="messages"></div>
 
           <div class="form-group">
-            <label for="edit_brand_name">Category Name</label>
+            <label for="edit_brand_name">Departemen Name</label>
             <input type="text" class="form-control" id="edit_category_name" name="edit_category_name" placeholder="Enter category name" autocomplete="off">
           </div>
           <div class="form-group">
@@ -160,7 +160,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Remove Category</h4>
+        <h4 class="modal-title">Remove Departemen</h4>
       </div>
 
       <form role="form" action="<?php echo base_url('category/remove') ?>" method="post" id="removeForm">
