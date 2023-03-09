@@ -51,7 +51,6 @@
                 <th>Image</th>
                 <th>SKU</th>
                 <th>Product Name</th>
-                <th>Price</th>
                 <th>Qty</th>
                 <th>Store</th>
                 <th>Availability</th>

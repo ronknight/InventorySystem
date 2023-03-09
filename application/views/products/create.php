@@ -66,11 +66,6 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="price">Price</label>
-                  <input type="text" class="form-control" id="price" name="price" placeholder="Enter price" autocomplete="off" />
-                </div>
-
-                <div class="form-group">
                   <label for="qty">Qty</label>
                   <input type="text" class="form-control" id="qty" name="qty" placeholder="Enter Qty" autocomplete="off" />
                 </div>
@@ -80,20 +75,7 @@
                   <textarea type="text" class="form-control" id="description" name="description" placeholder="Enter 
                   description" autocomplete="off">
                   </textarea>
-                </div>
-
-                <?php if($attributes): ?>
-                  <?php foreach ($attributes as $k => $v): ?>
-                    <div class="form-group">
-                      <label for="groups"><?php echo $v['attribute_data']['name'] ?></label>
-                      <select class="form-control select_group" id="attributes_value_id" name="attributes_value_id[]" multiple="multiple">
-                        <?php foreach ($v['attribute_value'] as $k2 => $v2): ?>
-                          <option value="<?php echo $v2['id'] ?>"><?php echo $v2['value'] ?></option>
-                        <?php endforeach ?>
-                      </select>
-                    </div>    
-                  <?php endforeach ?>
-                <?php endif; ?>
+                </div> 
 
                 <div class="form-group">
                   <label for="brands">Brands</label>

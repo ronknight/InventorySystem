@@ -70,11 +70,6 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="price">Price</label>
-                  <input type="text" class="form-control" id="price" name="price" placeholder="Enter price" value="<?php echo $product_data['price']; ?>" autocomplete="off" />
-                </div>
-
-                <div class="form-group">
                   <label for="qty">Qty</label>
                   <input type="text" class="form-control" id="qty" name="qty" placeholder="Enter Qty" value="<?php echo $product_data['qty']; ?>" autocomplete="off" />
                 </div>
@@ -86,20 +81,6 @@
                     <?php echo $product_data['description']; ?>
                   </textarea>
                 </div>
-
-                <?php $attribute_id = json_decode($product_data['attribute_value_id']); ?>
-                <?php if($attributes): ?>
-                  <?php foreach ($attributes as $k => $v): ?>
-                    <div class="form-group">
-                      <label for="groups"><?php echo $v['attribute_data']['name'] ?></label>
-                      <select class="form-control select_group" id="attributes_value_id" name="attributes_value_id[]" multiple="multiple">
-                        <?php foreach ($v['attribute_value'] as $k2 => $v2): ?>
-                          <option value="<?php echo $v2['id'] ?>" <?php if(in_array($v2['id'], $attribute_id)) { echo "selected"; } ?>><?php echo $v2['value'] ?></option>
-                        <?php endforeach ?>
-                      </select>
-                    </div>    
-                  <?php endforeach ?>
-                <?php endif; ?>
 
                 <div class="form-group">
                   <label for="brands">Brands</label>
