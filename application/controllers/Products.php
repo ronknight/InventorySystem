@@ -15,7 +15,6 @@ class Products extends Admin_Controller
         $this->load->model('model_products');
         $this->load->model('model_brands');
         $this->load->model('model_category');
-        $this->load->model('model_stores');
     }
 
     /* 
@@ -42,7 +41,7 @@ class Products extends Admin_Controller
 
         foreach ($data as $key => $value) {
 
-            $store_data = $this->model_stores->getStoresData($value['store_id']);
+
             // button
             $buttons = '';
             if (in_array('updateProduct', $this->permission)) {
@@ -71,7 +70,6 @@ class Products extends Admin_Controller
                 $value['sku'],
                 $value['name'],
                 $value['qty'] . ' ' . $qty_status,
-                $store_data['name'],
                 $availability,
                 $buttons
             );
@@ -94,7 +92,6 @@ class Products extends Admin_Controller
         $this->form_validation->set_rules('product_name', 'Product name', 'trim|required');
         $this->form_validation->set_rules('sku', 'SKU', 'trim|required');
         $this->form_validation->set_rules('qty', 'Qty', 'trim|required');
-        $this->form_validation->set_rules('store', 'Store', 'trim|required');
         $this->form_validation->set_rules('availability', 'Availability', 'trim|required');
 
 
@@ -110,7 +107,6 @@ class Products extends Admin_Controller
                 'description' => $this->input->post('description'),
                 'brand_id' => json_encode($this->input->post('brands')),
                 'category_id' => json_encode($this->input->post('category')),
-                'store_id' => $this->input->post('store'),
                 'availability' => $this->input->post('availability'),
             );
 
@@ -126,7 +122,6 @@ class Products extends Admin_Controller
 
             $this->data['brands'] = $this->model_brands->getActiveBrands();
             $this->data['category'] = $this->model_category->getActiveCategroy();
-            $this->data['stores'] = $this->model_stores->getActiveStore();
 
             $this->render_template('products/create', $this->data);
         }
@@ -179,7 +174,6 @@ class Products extends Admin_Controller
         $this->form_validation->set_rules('product_name', 'Product name', 'trim|required');
         $this->form_validation->set_rules('sku', 'SKU', 'trim|required');
         $this->form_validation->set_rules('qty', 'Qty', 'trim|required');
-        $this->form_validation->set_rules('store', 'Store', 'trim|required');
         $this->form_validation->set_rules('availability', 'Availability', 'trim|required');
 
         if ($this->form_validation->run() == TRUE) {
@@ -193,7 +187,6 @@ class Products extends Admin_Controller
 
                 'brand_id' => json_encode($this->input->post('brands')),
                 'category_id' => json_encode($this->input->post('category')),
-                'store_id' => $this->input->post('store'),
                 'availability' => $this->input->post('availability'),
             );
 
@@ -217,8 +210,6 @@ class Products extends Admin_Controller
           
             $this->data['brands'] = $this->model_brands->getActiveBrands();
             $this->data['category'] = $this->model_category->getActiveCategroy();
-            $this->data['stores'] = $this->model_stores->getActiveStore();
-
             $product_data = $this->model_products->getProductData($product_id);
             $this->data['product_data'] = $product_data;
             $this->render_template('products/edit', $this->data);

@@ -96,15 +96,6 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="store">Store</label>
-                  <select class="form-control select_group" id="store" name="store">
-                    <?php foreach ($stores as $k => $v): ?>
-                      <option value="<?php echo $v['id'] ?>"><?php echo $v['name'] ?></option>
-                    <?php endforeach ?>
-                  </select>
-                </div>
-
-                <div class="form-group">
                   <label for="store">Availability</label>
                   <select class="form-control" id="availability" name="availability">
                     <option value="1">Yes</option>

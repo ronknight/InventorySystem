@@ -103,15 +103,6 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="store">Store</label>
-                  <select class="form-control select_group" id="store" name="store">
-                    <?php foreach ($stores as $k => $v): ?>
-                      <option value="<?php echo $v['id'] ?>" <?php if($product_data['store_id'] == $v['id']) { echo "selected='selected'"; } ?> ><?php echo $v['name'] ?></option>
-                    <?php endforeach ?>
-                  </select>
-                </div>
-
-                <div class="form-group">
                   <label for="store">Availability</label>
                   <select class="form-control" id="availability" name="availability">
                     <option value="1" <?php if($product_data['availability'] == 1) { echo "selected='selected'"; } ?>>Yes</option>

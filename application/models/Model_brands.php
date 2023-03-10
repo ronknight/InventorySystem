@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Model_brands extends CI_Model
 {
@@ -18,7 +18,7 @@ class Model_brands extends CI_Model
 	/* get the brand data */
 	public function getBrandData($id = null)
 	{
-		if($id) {
+		if ($id) {
 			$sql = "SELECT * FROM `brands` WHERE id = ?";
 			$query = $this->db->query($sql, array($id));
 			return $query->row_array();
@@ -31,7 +31,7 @@ class Model_brands extends CI_Model
 
 	public function create($data)
 	{
-		if($data) {
+		if ($data) {
 			$insert = $this->db->insert('brands', $data);
 			return ($insert == true) ? true : false;
 		}
@@ -39,7 +39,7 @@ class Model_brands extends CI_Model
 
 	public function update($data, $id)
 	{
-		if($data && $id) {
+		if ($data && $id) {
 			$this->db->where('id', $id);
 			$update = $this->db->update('brands', $data);
 			return ($update == true) ? true : false;
@@ -48,11 +48,17 @@ class Model_brands extends CI_Model
 
 	public function remove($id)
 	{
-		if($id) {
+		if ($id) {
 			$this->db->where('id', $id);
 			$delete = $this->db->delete('brands');
 			return ($delete == true) ? true : false;
 		}
 	}
 
+	public function countTotalBrand()
+	{
+		$sql = "SELECT * FROM `brands`";
+		$query = $this->db->query($sql);
+		return $query->num_rows();
+	}
 }

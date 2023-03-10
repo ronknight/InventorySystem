@@ -38,9 +38,9 @@
             <!-- small box -->
             <div class="small-box bg-green">
               <div class="inner">
-                <h3><?php echo $total_paid_orders ?></h3>
+                <h3><?php echo $total_brands ?></h3>
 
-                <p>Total </p>
+                <p>Total Brands</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
@@ -68,14 +68,14 @@
             <!-- small box -->
             <div class="small-box bg-red">
               <div class="inner">
-                <h3><?php echo $total_stores ?></h3>
+                <h3><?php echo $total_category ?></h3>
 
-                <p>Total Stores</p>
+                <p>Total Departemen</p>
               </div>
               <div class="icon">
                 <i class="ion ion-android-home"></i>
               </div>
-              <a href="<?php echo base_url('stores/') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              <a href="<?php echo base_url('category/') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
