@@ -55,4 +55,11 @@ class Model_category extends CI_Model
 		}
 	}
 
+	public function countTotalCategory()
+	{
+		$sql = "SELECT * FROM `categories`";
+		$query = $this->db->query($sql);
+		return $query->num_rows();
+	}
+
 }
