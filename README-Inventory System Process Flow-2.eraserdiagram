@@ -1,0 +1,60 @@
+flowchart-diagram
+
+
+title Inventory System Process Flow
+
+// Define nodes and relationships
+Start [shape: oval, icon: flag] > Clone or download files [icon: download]
+Clone or download files > Add to root folder [icon: folder-plus]
+Add to root folder > Open PhpMyAdmin [icon: database]
+Open PhpMyAdmin > Create new database named stock [icon: database]
+Create new database named stock > Import stock.sql [icon: file-text]
+Import stock.sql > Turn on Apache and MySQL [icon: server]
+Turn on Apache and MySQL > System available at localhost [shape: oval, icon: globe]
+
+// Define Groups
+Manage Users [icon: users] {
+  Add new user detail [icon: user-plus]
+  View update and remove user information [icon: user-check]
+}
+Manage Groups [icon: layers] {
+  Add new group information [icon: layer-plus]
+  View update and remove group information [icon: layer-group]
+}
+Manage Brands [icon: tag] {
+  Add new brand data [icon: tag-plus]
+  View update and remove brand information [icon: tags]
+}
+Manage Category [icon: clipboard] {
+  Add new category information [icon: clipboard-plus]
+  View update and remove category information [icon: clipboard-check]
+}
+Manage Stores [icon: store] {
+  Add new store information [icon: store-plus]
+  View update and remove stores information [icon: store-alt]
+}
+Manage Attributes [icon: sliders] {
+  Add new attribute information [icon: sliders-h]
+  View update and remove attributes information [icon: sliders-v]
+}
+Manage Products [icon: box] {
+  Add new product information [icon: box-open]
+  View update and remove products information [icon: boxes]
+}
+Manage Orders [icon: shopping-cart] {
+  Add new order information [icon: cart-plus]
+  View update and remove orders information [icon: cart-arrow-down]
+}
+Reports [icon: bar-chart] {
+  View total amount of sales [icon: chart-line]
+}
+Company [icon: building] {
+  Update company information [icon: edit-3]
+}
+Profile [icon: user] {
+  View logged in user information [icon: eye]
+}
+Setting [icon: settings] {
+  Update logged in user information [icon: tool]
+}
+

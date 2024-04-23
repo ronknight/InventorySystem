@@ -1,0 +1,28 @@
+cloud-architecture-diagram
+
+
+title Inventory System Architecture
+
+// Define groups and nodes
+Web Server {
+  CodeIgniter [icon: php]
+  PHP [icon: php]
+}
+Database Server {
+  MySQL [icon: mysql]
+}
+Client Devices {
+  Browser [icon: globe]
+}
+Application Server {
+  Apache [icon: apache]
+  XAMPP [icon: lamp]
+}
+
+// Define connections where none are between a parent group and its own child node
+Browser > CodeIgniter
+CodeIgniter > MySQL
+Apache > CodeIgniter
+XAMPP > Apache
+XAMPP > MySQL
+
