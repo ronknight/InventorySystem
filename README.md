@@ -1,7 +1,29 @@
 <p><a target="_blank" href="https://app.eraser.io/workspace/m5slGlRfBf7Xmi5HwElp" id="edit-in-eraser-github-link"><img alt="Edit in Eraser" src="https://firebasestorage.googleapis.com/v0/b/second-petal-295822.appspot.com/o/images%2Fgithub%2FOpen%20in%20Eraser.svg?alt=media&amp;token=968381c8-a7e7-472a-8ed6-4a6626da5501"></a></p>
 
-# Inventory System
-Create an Inventory System using CodeIgniter, MySQL & PHP
+
+<h1 align="center"><a href="https://github.com/ronknight/HTML-and-CSS-Minifier">Inventory System</a></h1>
+<h4 align="center">Create an Inventory System using CodeIgniter, MySQL & PHP</h4>
+
+<p align="center">
+<a href="https://twitter.com/PinoyITSolution"><img src="https://img.shields.io/twitter/follow/PinoyITSolution?style=social"></a>
+<a href="https://github.com/ronknight?tab=followers"><img src="https://img.shields.io/github/followers/ronknight?style=social"></a>
+<a href="https://github.com/ronknight/HTML-and-CSS-Minifier/issues"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"></a>
+<a href="https://github.com/ronknight/HTML-and-CSS-Minifier/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg"></a>
+<a href="#"><img src="https://img.shields.io/badge/Made%20with-Python-1f425f.svg"></a>
+<a href="#"><img src="https://img.shields.io/badge/Made%20with%20%F0%9F%A4%8D%20by%20-%20Ronknight%20-%20red"></a>
+</p>
+
+<p align="center">
+  <a href="#screenshots">Screenshots</a> •
+  <a href="#features">Features</a> •
+  <a href="#credential">Credential</a> •
+  <a href="#requirements">Requirements</a> •
+  <a href="#installation">Installation</a> •
+  <a href="#resources">Resources</a> •
+  <a href="#diagrams">Diagrams</a> •
+</p>
+
+---
 
 # Screenshots
 ![Login Page](https://github.com/ronknight/InventorySystem/blob/master/assets/images/screenshots/login.PNG "")
@@ -10,7 +32,7 @@ Create an Inventory System using CodeIgniter, MySQL & PHP
 
 ![Database](https://github.com/ronknight/InventorySystem/blob/master/assets/images/screenshots/database.PNG "")
 
-# System Features
+# Features
 1. Manage Users
 - Add new user detail
 - View, Update, and remove user information
@@ -44,13 +66,14 @@ Create an Inventory System using CodeIgniter, MySQL & PHP
 - View the logged in user information
 1. Setting
 - View, and Update logged in user information
-# Super Admin Credential
+
+# Credential
 email: [﻿admin@admin.com](mailto:admin@admin.com)
 password: password
 
 database name: stock
 
-# Server Requirements
+# Requirements
 PHP version 5.6 or newer is recommended.
 
 ```
@@ -70,17 +93,11 @@ You can choose to install any of the following Application Server: LAMP, MAMP, X
 4. Import stock.sql to your stock database.
 5. Turn On Apache and MySQL on your Application Server Control Panel.
 6. Your system show be found on [﻿http://localhost/InventorySystem/](http://localhost/InventorySystem/) 
-# License
-MIT
 
 # Resources
 Original Sourcecode from CodeFolder - [﻿https://codersfolder.com/2018/02/stock-management-system-v2-codeigniter/](https://codersfolder.com/2018/02/stock-management-system-v2-codeigniter/)
 CodeIgniter - Web Framework
 AdminLTE - Theme
-
-# Acknowledgement
-Great Project
-
 
 <!-- eraser-additional-content -->
 ## Diagrams
