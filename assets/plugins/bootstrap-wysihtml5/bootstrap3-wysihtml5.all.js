@@ -4205,7 +4205,7 @@ wysihtml5.browser = (function() {
         re;
 
     if (navigator.appName == 'Microsoft Internet Explorer') {
-      re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+      re = new RegExp("MSIE ([0-9]{1,}[.0-9]{0,})");
     } else if (navigator.appName == 'Netscape') {
       re = new RegExp("Trident/.*rv:([0-9]{1,}[.0-9]{0,})");
     }
