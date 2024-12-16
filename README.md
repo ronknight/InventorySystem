@@ -12,7 +12,6 @@
   <a href="https://youtube.com/@PinoyITSolution"><img src="https://img.shields.io/youtube/channel/subscribers/UCeoETAlg3skyMcQPqr97omg"></a>
 <a href="https://github.com/ronknight/InventorySystem/issues"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"></a>
 <a href="https://github.com/ronknight/InventorySystem/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg"></a>
-<a href="#"><img src="https://img.shields.io/badge/Made%20with-Python-1f425f.svg"></a>
 <a href="https://github.com/ronknight"><img src="https://img.shields.io/badge/Made%20with%20%F0%9F%A4%8D%20by%20-%20Ronknight%20-%20red"></a>
 </p>
 
