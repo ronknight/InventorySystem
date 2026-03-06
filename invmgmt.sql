@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 11, 2018 at 10:20 PM
--- Server version: 10.1.36-MariaDB
--- PHP Version: 7.2.11
+-- Host: 127.0.0.1:3306
+-- Generation Time: Nov 16, 2025 at 05:55 PM
+-- Server version: 9.1.0
+-- PHP Version: 8.3.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `stock`
+-- Database: `invmgmt`
 --
 
 -- --------------------------------------------------------
@@ -28,11 +27,13 @@ SET time_zone = "+00:00";
 -- Table structure for table `attributes`
 --
 
-CREATE TABLE `attributes` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `attributes`;
+CREATE TABLE IF NOT EXISTS `attributes` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `active` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `active` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -40,11 +41,13 @@ CREATE TABLE `attributes` (
 -- Table structure for table `attribute_value`
 --
 
-CREATE TABLE `attribute_value` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `attribute_value`;
+CREATE TABLE IF NOT EXISTS `attribute_value` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `value` varchar(255) NOT NULL,
-  `attribute_parent_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `attribute_parent_id` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `attribute_value`
@@ -66,11 +69,13 @@ INSERT INTO `attribute_value` (`id`, `value`, `attribute_parent_id`) VALUES
 -- Table structure for table `brands`
 --
 
-CREATE TABLE `brands` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `brands`;
+CREATE TABLE IF NOT EXISTS `brands` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `active` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `active` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `brands`
@@ -85,11 +90,13 @@ INSERT INTO `brands` (`id`, `name`, `active`) VALUES
 -- Table structure for table `categories`
 --
 
-CREATE TABLE `categories` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE IF NOT EXISTS `categories` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `active` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `active` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `categories`
@@ -104,8 +111,9 @@ INSERT INTO `categories` (`id`, `name`, `active`) VALUES
 -- Table structure for table `company`
 --
 
-CREATE TABLE `company` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `company`;
+CREATE TABLE IF NOT EXISTS `company` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `company_name` varchar(255) NOT NULL,
   `service_charge_value` varchar(255) NOT NULL,
   `vat_charge_value` varchar(255) NOT NULL,
@@ -113,15 +121,16 @@ CREATE TABLE `company` (
   `phone` varchar(255) NOT NULL,
   `country` varchar(255) NOT NULL,
   `message` text NOT NULL,
-  `currency` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `currency` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `company`
 --
 
 INSERT INTO `company` (`id`, `company_name`, `service_charge_value`, `vat_charge_value`, `address`, `phone`, `country`, `message`, `currency`) VALUES
-(1, 'ABC Inc.', '13', '10', '1234 Main St. Los Angeles, CA 98765 U.S.A.', '(123) 456-7890', 'United States of America', 'Sample message<br>', 'USD');
+(1, 'ABC Inc.', '13', '10', '1234 Main St. Los Angeles, CA 98765 U.S.A.', '(123) 456-7890', 'United States of America', '<p>wjqhkdhqew</p>', 'THB');
 
 -- --------------------------------------------------------
 
@@ -129,11 +138,13 @@ INSERT INTO `company` (`id`, `company_name`, `service_charge_value`, `vat_charge
 -- Table structure for table `groups`
 --
 
-CREATE TABLE `groups` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `groups`;
+CREATE TABLE IF NOT EXISTS `groups` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `group_name` varchar(255) NOT NULL,
-  `permission` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `permission` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `groups`
@@ -149,8 +160,9 @@ INSERT INTO `groups` (`id`, `group_name`, `permission`) VALUES
 -- Table structure for table `orders`
 --
 
-CREATE TABLE `orders` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE IF NOT EXISTS `orders` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `bill_no` varchar(255) NOT NULL,
   `customer_name` varchar(255) NOT NULL,
   `customer_address` varchar(255) NOT NULL,
@@ -163,9 +175,10 @@ CREATE TABLE `orders` (
   `vat_charge` varchar(255) NOT NULL,
   `net_amount` varchar(255) NOT NULL,
   `discount` varchar(255) NOT NULL,
-  `paid_status` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `paid_status` int NOT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -173,14 +186,16 @@ CREATE TABLE `orders` (
 -- Table structure for table `orders_item`
 --
 
-CREATE TABLE `orders_item` (
-  `id` int(11) NOT NULL,
-  `order_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `orders_item`;
+CREATE TABLE IF NOT EXISTS `orders_item` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `order_id` int NOT NULL,
+  `product_id` int NOT NULL,
   `qty` varchar(255) NOT NULL,
   `rate` varchar(255) NOT NULL,
-  `amount` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `amount` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -188,20 +203,42 @@ CREATE TABLE `orders_item` (
 -- Table structure for table `products`
 --
 
-CREATE TABLE `products` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `products`;
+CREATE TABLE IF NOT EXISTS `products` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `sku` varchar(255) NOT NULL,
-  `price` varchar(255) NOT NULL,
-  `qty` varchar(255) NOT NULL,
   `image` text NOT NULL,
   `description` text NOT NULL,
   `attribute_value_id` text,
   `brand_id` text NOT NULL,
   `category_id` text NOT NULL,
-  `store_id` int(11) NOT NULL,
-  `availability` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `store_id` int NOT NULL,
+  `availability` int NOT NULL,
+  `status` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `purchase_stock`
+--
+
+DROP TABLE IF EXISTS `purchase_stock`;
+CREATE TABLE IF NOT EXISTS `purchase_stock` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `vendor_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `qtty` int NOT NULL,
+  `u_price` int NOT NULL,
+  `purchase_date` date NOT NULL,
+  `expiry_date` date NOT NULL,
+  `status` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_vendor_id` (`vendor_id`),
+  KEY `fk_product_id` (`product_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf16;
 
 -- --------------------------------------------------------
 
@@ -209,11 +246,13 @@ CREATE TABLE `products` (
 -- Table structure for table `stores`
 --
 
-CREATE TABLE `stores` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `stores`;
+CREATE TABLE IF NOT EXISTS `stores` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `active` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `active` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -221,16 +260,18 @@ CREATE TABLE `stores` (
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
   `phone` varchar(255) NOT NULL,
-  `gender` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `gender` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `users`
@@ -245,11 +286,13 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `firstname`, `lastna
 -- Table structure for table `user_group`
 --
 
-CREATE TABLE `user_group` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `group_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `user_group`;
+CREATE TABLE IF NOT EXISTS `user_group` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `group_id` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_group`
@@ -258,157 +301,26 @@ CREATE TABLE `user_group` (
 INSERT INTO `user_group` (`id`, `user_id`, `group_id`) VALUES
 (1, 1, 1);
 
---
--- Indexes for dumped tables
---
+-- --------------------------------------------------------
 
 --
--- Indexes for table `attributes`
---
-ALTER TABLE `attributes`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `attribute_value`
---
-ALTER TABLE `attribute_value`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `brands`
---
-ALTER TABLE `brands`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `categories`
---
-ALTER TABLE `categories`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `company`
---
-ALTER TABLE `company`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `groups`
---
-ALTER TABLE `groups`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `orders`
---
-ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `orders_item`
---
-ALTER TABLE `orders_item`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `products`
---
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `stores`
---
-ALTER TABLE `stores`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `user_group`
---
-ALTER TABLE `user_group`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
+-- Table structure for table `vendor`
 --
 
---
--- AUTO_INCREMENT for table `attributes`
---
-ALTER TABLE `attributes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `attribute_value`
---
-ALTER TABLE `attribute_value`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- AUTO_INCREMENT for table `brands`
---
-ALTER TABLE `brands`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `categories`
---
-ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `company`
---
-ALTER TABLE `company`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `groups`
---
-ALTER TABLE `groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `orders`
---
-ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `orders_item`
---
-ALTER TABLE `orders_item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `products`
---
-ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `stores`
---
-ALTER TABLE `stores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `user_group`
---
-ALTER TABLE `user_group`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+DROP TABLE IF EXISTS `vendor`;
+CREATE TABLE IF NOT EXISTS `vendor` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `vendor_name` varchar(255) NOT NULL,
+  `service_charge_value` varchar(255) NOT NULL,
+  `vat_charge_value` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `details` text NOT NULL,
+  `currency` varchar(255) NOT NULL,
+  `status` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
